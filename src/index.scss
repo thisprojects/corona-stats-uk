@@ -1,0 +1,68 @@
+body {
+  color: dimgray;
+}
+
+label {
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter {
+  h4 {
+    margin: 5px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.loading {
+  text-align: center;
+}
+
+.nodata {
+  width: 300px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  z-index: 5;
+}
+
+.chart {
+  position: relative;
+}
+
+@media screen and (max-width: 600px) {
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8em;
+  }
+  header {
+    padding: 0;
+    svg {
+      display: none;
+    }
+    h2 {
+      font-size: 1em;
+    }
+  }
+}
