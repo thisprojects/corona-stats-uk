@@ -7,7 +7,7 @@ import "./index.scss";
 import getCoronaData from "./Constants/apolloClient";
 import optionsTemplate from "./Constants/options";
 import convertData from "./Constants/convertData";
-import { FaBriefcaseMedical } from "react-icons/fa";
+import Totals from "./Totals";
 
 const App = () => {
   const [series, updateSeries] = React.useState([]);
@@ -49,10 +49,11 @@ const App = () => {
     getData();
   }, []);
 
+  console.log(cachedResults.current);
+
   return (
     <div className="container">
       <header>
-        <FaBriefcaseMedical size="3em" />
         <h2>Uk Corona Statistics</h2>
       </header>
       <div className="chart">
@@ -60,7 +61,13 @@ const App = () => {
           <h1 className="nodata">Please Adjust Filters</h1>
         )}
         {!loading && (
-          <HighchartsReact highcharts={Highcharts} options={options} />
+          <div className="totals-wrapper">
+            <h3>Latest Totals</h3>
+            <div className="totals">
+              <Totals series={cachedResults.current} />
+            </div>
+            <HighchartsReact highcharts={Highcharts} options={options} />
+          </div>
         )}
         {loading && <h1 className="loading">Loading....</h1>}
       </div>

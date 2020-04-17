@@ -13,11 +13,9 @@ form {
 
 header {
   border: 1px solid lightgray;
-  padding: 20px;
-  margin-bottom: 30px;
+  padding-left: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: whitesmoke;
 }
 
 .filter {
@@ -30,10 +28,32 @@ header {
   align-items: center;
   border: 1px solid lightgray;
   padding: 10px;
+  background-color: whitesmoke;
 }
 
 .loading {
   text-align: center;
+}
+
+.totals-wrapper {
+  text-align: center;
+  margin: 20px;
+  border: 1px solid lightgrey;
+  h3 {
+    background-color: whitesmoke;
+    padding: 20px;
+    margin: 0px;
+  }
+  .totals {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 15px;
+  }
+  .total-category {
+    text-align: center;
+  }
 }
 
 .nodata {
@@ -57,12 +77,12 @@ header {
     font-size: 0.8em;
   }
   header {
-    padding: 0;
-    svg {
-      display: none;
-    }
     h2 {
       font-size: 1em;
     }
+  }
+
+  .total-category {
+    font-size: 0.8em;
   }
 }
