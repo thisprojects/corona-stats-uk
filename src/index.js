@@ -54,20 +54,20 @@ const App = () => {
       <header>
         <h2>Uk Corona Statistics</h2>
       </header>
-      <div className="chart">
-        {!loading && noData && (
+      <div className="line-chart">
+        { !loading && noData && (
           <h1 className="nodata">Please Adjust Filters</h1>
         )}
-        {!loading && (
+        { !loading && (
           <div className="totals-wrapper">
             <h3>Latest Totals</h3>
             <div className="totals">
-              <Totals series={cachedResults.current} />
+              <Totals series={ cachedResults.current } />
             </div>
-            <HighchartsReact highcharts={Highcharts} options={options} />
+            <HighchartsReact highcharts={ Highcharts } options={ options } />
           </div>
         )}
-        {loading && <h1 className="loading">Loading....</h1>}
+        { loading && <h1 className="loading">Loading....</h1> }
       </div>
       <div className="filter">
         <h4>Filters</h4>
