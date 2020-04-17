@@ -1,18 +1,16 @@
 import React from "react";
 import { render } from "react-dom";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
 import _ from "lodash";
 import "./index.scss";
 import getCoronaData from "./Constants/apolloClient";
 import optionsTemplate from "./Constants/options";
 import convertData from "./Constants/convertData";
-import Totals from "./Totals";
+import LineChart from "./LineChart";
 
 const App = () => {
   const [series, updateSeries] = React.useState([]);
   const [loading, updateLoading] = React.useState(true);
-  let cachedResults = React.useRef([]);
+  const [cachedResults, updateCachedResults] = React.useState([]);
 
   // setup chart options - the series object holds the data from api
   let options = _.cloneDeep(optionsTemplate);
@@ -21,7 +19,7 @@ const App = () => {
   const getData = async () => {
     let apiResponse = convertData(await getCoronaData());
     updateSeries(_.cloneDeep(apiResponse));
-    cachedResults.current = _.cloneDeep(apiResponse);
+    updateCachedResults(_.cloneDeep(apiResponse));
     updateLoading(false);
   };
 
@@ -34,9 +32,7 @@ const App = () => {
       seriesFiltered = _.cloneDeep(series.filter((item) => item.name !== name));
     } else {
       // otherwise find the data from cache and re insert it
-      let x = _.cloneDeep(
-        cachedResults.current.find((item) => item.name === name)
-      );
+      let x = _.cloneDeep(cachedResults.find((item) => item.name === name));
       seriesFiltered = series.concat(x);
     }
     updateSeries(seriesFiltered);
@@ -54,21 +50,12 @@ const App = () => {
       <header>
         <h2>Uk Corona Statistics</h2>
       </header>
-      <div className="line-chart">
-        { !loading && noData && (
-          <h1 className="nodata">Please Adjust Filters</h1>
-        )}
-        { !loading && (
-          <div className="totals-wrapper">
-            <h3>Latest Totals</h3>
-            <div className="totals">
-              <Totals series={ cachedResults.current } />
-            </div>
-            <HighchartsReact highcharts={ Highcharts } options={ options } />
-          </div>
-        )}
-        { loading && <h1 className="loading">Loading....</h1> }
-      </div>
+      <LineChart
+        loading={loading}
+        noData={noData}
+        options={options}
+        cachedResults={cachedResults}
+      />
       <div className="filter">
         <h4>Filters</h4>
         <form>
