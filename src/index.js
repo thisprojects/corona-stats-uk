@@ -49,8 +49,6 @@ const App = () => {
     getData();
   }, []);
 
-  console.log(cachedResults.current);
-
   return (
     <div className="container">
       <header>
